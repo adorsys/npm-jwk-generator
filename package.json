@@ -1,0 +1,70 @@
+{
+  "name": "a-jwk-generator",
+  "version": "0.0.0-development",
+  "description": "A generator for JSON Web Keys",
+  "main": "dist/index.js",
+  "scripts": {
+    "prebuild": "rimraf dist",
+    "build": "babel --out-dir dist --copy-files --ignore *.test.js src",
+    "clean": "rimraf dist coverage .nyc_output",
+    "commit": "git-cz ",
+    "coverage": "tap --coverage-report=html",
+    "coverage:check": "mkdirp coverage && tap --coverage-report=text-lcov --check-coverage --branches 85 --functions 90 --lines 100 --statements 90 > coverage/lcov.info",
+    "coverage:report": "cat ./coverage/lcov.info | codecov",
+    "lint": "npm run build && eslint src/*.js",
+    "test": "npm run lint && tap src/*.test.js -Rspec",
+    "test:build": "npm run build && npm t",
+    "test:watch": "onchange 'src/*.js' -i -- npm run test:build",
+    "test:coverage": "npm t -- --cov",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    },
+    "ghooks": {
+      "pre-commit": "npm run lint && npm run test:coverage && npm run coverage:check"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adorsys/npm-jwk-generator.git"
+  },
+  "keywords": [
+    "generator",
+    "jwk"
+  ],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "author": "Gunnar Radzom <gra@adorsys.de> (http://adorsys.de/)",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/adorsys/npm-jwk-generator/issues"
+  },
+  "homepage": "https://github.com/adorsys/npm-jwk-generator#readme",
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-polyfill": "6.23.0",
+    "babel-preset-env": "1.5.2",
+    "babel-preset-stage-2": "6.24.1",
+    "codecov": "2.2.0",
+    "commitizen": "2.9.6",
+    "cz-conventional-changelog": "2.0.0",
+    "eslint": "3.19.0",
+    "eslint-config-adorsys": "1.0.0",
+    "ghooks": "2.0.0",
+    "mkdirp": "0.5.1",
+    "onchange": "3.2.1",
+    "prettier": "1.4.4",
+    "rimraf": "2.6.1",
+    "semantic-release": "^6.3.6",
+    "tap": "10.3.3",
+    "testdouble": "3.0.0"
+  },
+  "dependencies": {
+    "node-jose": "0.9.4"
+  }
+}
