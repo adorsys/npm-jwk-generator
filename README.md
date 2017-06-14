@@ -7,6 +7,7 @@
 [![license](https://img.shields.io/github/license/adorsys/npm-jwk-generator.svg?style=flat-square)](https://github.com/adorsys/npm-jwk-generator/blob/master/LICENSE)
 
 A generator for creating JSON web Keys.
+Only 256 bit HMAC Keys are supported yet.
 It uses the package 'node-jose'.
 
 ## Installation
