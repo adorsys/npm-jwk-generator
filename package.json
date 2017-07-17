@@ -7,7 +7,7 @@
     "prebuild": "rimraf dist",
     "build": "babel --out-dir dist --copy-files --ignore *.test.js src",
     "clean": "rimraf dist coverage .nyc_output",
-    "pre-commit": "npm run lint && npm run test:coverage && npm run coverage:check",
+    "precommit": "npm run lint && npm run test:coverage && npm run coverage:check",
     "commit": "git-cz ",
     "coverage": "tap --coverage-report=html",
     "coverage:check": "mkdirp coverage && tap --coverage-report=text-lcov --check-coverage --branches 85 --functions 90 --lines 100 --statements 90 > coverage/lcov.info",
