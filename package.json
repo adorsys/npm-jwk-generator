@@ -7,23 +7,20 @@
     "prebuild": "rimraf dist",
     "build": "babel --out-dir dist --copy-files --ignore *.test.js src",
     "clean": "rimraf dist coverage .nyc_output",
+    "pre-commit": "npm run lint && npm run test:coverage && npm run coverage:check",
     "commit": "git-cz ",
     "coverage": "tap --coverage-report=html",
     "coverage:check": "mkdirp coverage && tap --coverage-report=text-lcov --check-coverage --branches 85 --functions 90 --lines 100 --statements 90 > coverage/lcov.info",
     "coverage:report": "cat ./coverage/lcov.info | codecov",
     "lint": "npm run build && eslint src/*.js",
     "test": "npm run lint && tap src/*.test.js -Rspec",
-    "test:build": "npm run build && npm t",
-    "test:watch": "onchange 'src/*.js' -i -- npm run test:build",
+    "test:watch": "onchange 'src/*.js' -i -- npm run t",
     "test:coverage": "npm t -- --cov",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "config": {
     "commitizen": {
       "path": "node_modules/cz-conventional-changelog"
-    },
-    "ghooks": {
-      "pre-commit": "npm run lint && npm run test:coverage && npm run coverage:check"
     }
   },
   "repository": {
@@ -55,7 +52,7 @@
     "cz-conventional-changelog": "2.0.0",
     "eslint": "3.19.0",
     "eslint-config-adorsys": "1.0.0",
-    "ghooks": "2.0.0",
+    "husky": "0.14.3",
     "mkdirp": "0.5.1",
     "onchange": "3.2.1",
     "prettier": "1.4.4",
